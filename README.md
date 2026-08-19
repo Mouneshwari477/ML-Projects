@@ -28,6 +28,3 @@ Walmart faces challenges in accurately predicting demand due to unforeseen facto
 
 ## 📈 Results
 Random Forest Regressor was selected as the final model based on comparable and generalizable RMSE performance across validation data, and used to generate final sales predictions on the test set.
-
-
-## 📁 Repository Structure
