@@ -56,3 +56,34 @@ Gold prices fluctuate due to market cycles, seasonal demand (festivals, cultural
 
 ## 📈 Results
 The Prophet model successfully captured weekly and yearly seasonality in gold prices and produced a 1-year forward forecast, providing a data-driven price range for trend analysis and planning.
+
+# Multi-Task Learning with NLP: Emotion, Violence & Hate Speech Detection
+
+## 📌 Overview
+This project builds a single multi-task deep learning model capable of simultaneously detecting **emotions**, **violence type**, and **hate speech** from text, using a shared embedding and LSTM architecture with task-specific output layers.
+
+## 🎯 Problem Statement
+Detecting harmful or emotionally sensitive content in text (social media, messages, etc.) often requires separate models for each task — emotion detection, violence classification, and hate speech detection — which is inefficient. This project explores whether a single shared model can learn generalizable text representations and perform all three classification tasks simultaneously.
+
+Each dataset was balanced to ~12,000 samples via class-wise sampling to address label imbalance before training.
+
+## 🔧 Approach
+1. **Data Preprocessing** – Cleaned and standardized column names across all three datasets, checked for nulls, and balanced class distributions through targeted sampling.
+2. **Text Preprocessing** – Removed stopwords using NLTK and tokenized text.
+3. **Tokenization & Padding** – Built a shared vocabulary tokenizer across all three datasets and padded sequences to a fixed length (50 tokens).
+4. **Multi-Task Model Architecture** – Designed a Keras functional-API model with:
+   - Three separate input layers (one per task)
+   - A **shared embedding layer** (128-dim) and **shared LSTM layer** (64 units) to learn common text representations
+   - Shared global average pooling and dropout for regularization
+   - Three task-specific dense output layers (softmax) for emotion, violence, and hate classification
+5. **Training** – Compiled with per-task sparse categorical crossentropy loss and accuracy metrics, trained jointly across all three outputs.
+6. **Evaluation** – Assessed each task independently using confusion matrices to visualize class-wise prediction performance.
+7. **Interactive Testing** – Built a simple `ipywidgets`-based interface for real-time text classification across all three tasks.
+
+## 🛠️ Tech Stack
+- **Language:** Python
+- **Libraries:** TensorFlow, NLTK, Scikit-learn, Pandas, NumPy, Seaborn, Matplotlib, ipywidgets
+- **Techniques:** Multi-Task Learning, Shared Embedding & LSTM Layers, Tokenization, Stopword Removal, Confusion Matrix Evaluation
+
+## 📈 Results
+The model was trained to jointly predict emotion, violence type, and hate speech category from a single shared text representation, with performance evaluated per task via confusion matrices. This demonstrates that a single architecture can generalize across multiple related NLP classification tasks rather than requiring separate models.
